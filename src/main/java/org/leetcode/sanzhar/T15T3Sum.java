@@ -8,13 +8,48 @@ import java.util.Set;
 
 public class T15T3Sum {
     public List<List<Integer>> threeSum(int[] nums) {
+        long counter = 0;
+        List<List<Integer>> result = new ArrayList<>();
+        Arrays.sort(nums);
+        int n = nums.length;
+
+        for (int i = 0; i < n; i++) {
+
+            if (i > 0 && nums[i] == nums[i - 1])
+                continue;
+            int j = i + 1;
+            int k = n - 1;
+            while (j < k) {
+                counter++;
+                if (nums[i] + nums[j] + nums[k] == 0) {
+                    result.add(Arrays.asList(nums[i], nums[j], nums[k]));
+                    j++;
+                    while (j < k && nums[j] == nums[j - 1]) {
+                        j++;
+                        counter++;
+                    }
+                } else if (nums[i] + nums[j] + nums[k] < 0) {
+                    j++;
+                } else {
+                    k--;
+                }
+            }
+
+        }
+        System.out.println("counter = " + counter);
+        return result;
+    }
+
+    public List<List<Integer>> threeSumOld(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
         Set<Integer> setOfExisted = new HashSet<>();
         Arrays.sort(nums);
 
-       // fori:
+        long counter = 0;
+
+        // fori:
         for (int i = 0; i < nums.length; i++) {
-            if (nums[i] > 0) {
+            if ((i < nums.length - 1) && nums[i] + nums[i + 1] > 0) {
                 break;
             }
             forj:
@@ -26,10 +61,14 @@ public class T15T3Sum {
                     continue;
                 //if (j < nums.length - 1 && nums[i] + nums[j] + nums[j + 1] > 0) {
                 //    continue;
-               // }
+                // }
                 for (int k = j + 1; k < nums.length; k++) {
+                    counter++;
                     if (j == k)
                         continue;
+                    if (nums[i] + nums[j] + nums[k] > 0) {
+                        break;
+                    }
                     if (nums[i] + nums[j] + nums[k] == 0) {
                         Integer[] arrSorted = {nums[i], nums[j], nums[k]};
                         // Arrays.sort(arrSorted);
@@ -37,12 +76,14 @@ public class T15T3Sum {
                         if (!setOfExisted.contains(hashCode)) {
                             setOfExisted.add(hashCode);
                             result.add(Arrays.asList(arrSorted));
-                            break ;
+                            break;
                         }
                     }
+
                 }
             }
         }
+        System.out.println("counter = " + counter);
         return result;
     }
 }
