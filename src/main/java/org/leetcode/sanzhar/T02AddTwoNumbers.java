@@ -1,4 +1,4 @@
-package org.leetcode.sanzhar.T2;
+package org.leetcode.sanzhar;
 
 class ListNode {
     int val;
@@ -17,7 +17,7 @@ class ListNode {
     }
 }
 
-public class AddTwoNumbers {
+public class T02AddTwoNumbers {
     /*
     Input: l1 = [2,4,3], l2 = [5,6,4]
 Output: [7,0,8]
@@ -69,7 +69,7 @@ Output: [8,9,9,9,0,0,0,1]
                 new ListNode(6,
                         new ListNode(4)));
 
-        ListNode listNode = new AddTwoNumbers().addTwoNumbers(listNode1, listNode2);
+        ListNode listNode = new T02AddTwoNumbers().addTwoNumbers(listNode1, listNode2);
         System.out.println("listNode = " + listNode);
     }
 }
